@@ -28,6 +28,9 @@ var y = 8*boxRef.offsetHeight;
 //sets initial position
 boxRef.style.left = x + "px";
 boxRef.style.top = y + "px";
+//sets length of outer square
+boxRef.xpath = back.offsetWidth - boxRef.offsetWidth;
+boxRef.ypath = back.offsetHeight - boxRef.offsetHeight;
 //sets initial period
 var period = 850;
 //sets step
@@ -38,15 +41,23 @@ document.body.addEventListener('keydown', function(event)
 {
     switch (event.keyCode) {
         case 37:
-            boxRef.style.left = (boxRef.offsetLeft-step)+"px";
+            if (boxRef.offsetLeft > 0) {
+                boxRef.style.left = (boxRef.offsetLeft-step)+"px";
+            }
             break;
         case 38:
-            boxRef.style.top = (boxRef.offsetTop-step)+"px";
+            if (boxRef.offsetTop > 0) {
+                boxRef.style.top = (boxRef.offsetTop-step)+"px";
+            }
             break;
         case 39:
-            boxRef.style.left = (boxRef.offsetLeft+step)+"px";
+            if (boxRef.offsetLeft < boxRef.xpath) {
+                boxRef.style.left = (boxRef.offsetLeft+step)+"px";
+            }
             break;
         case 40:
-            boxRef.style.top = (boxRef.offsetTop+step)+"px";            
+            if (boxRef.offsetTop <  boxRef.ypath) {
+                boxRef.style.top = (boxRef.offsetTop+step)+"px";
+            }
     }
 });
